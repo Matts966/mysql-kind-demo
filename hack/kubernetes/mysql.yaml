@@ -52,7 +52,7 @@ spec:
     - mountPath: /var/lib/mysql
       name: stash-e2e
     securityContext:
-      allowPrivilegeEscalation: false
+      allowPrivilegeEscalation: true
   restartPolicy: Never
   volumes:
   - name: stash-e2e
