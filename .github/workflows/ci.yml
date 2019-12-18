@@ -27,7 +27,9 @@ jobs:
         version: latest
 
     - name: Available platforms
-      run: echo ${{ steps.buildx.outputs.platforms }}
+      run: |
+        echo ${{ steps.buildx.outputs.platforms }}
+        docker info
 
     - name: Create Kubernetes ${{ matrix.k8s }} cluster
       id: kind
