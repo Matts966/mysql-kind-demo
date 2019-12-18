@@ -30,4 +30,6 @@ jobs:
     #   run: echo ${{ steps.buildx.outputs.platforms }}
 
     - name: Run mysql
-      run: docker run mysql:8.0.14 mysqld --verbose --help
+      run: |
+      docker info
+      docker run mysql:8.0.14 mysqld --verbose --help
