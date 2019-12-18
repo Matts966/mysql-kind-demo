@@ -40,7 +40,7 @@ spec:
     image: mysql:8.0.14
     imagePullPolicy: IfNotPresent
     name: mysql
-    command: ["/bin/sh"]
+    command: ["/bin/bash"]
     args:
     - -c
     - "set -x; whoami; cat /etc/passwd; mount; echo; echo; ls -lah /etc/; ls -lah /etc/mysql; ls -lah /etc/mysql/conf.d; touch /etc/mysql/conf.d/test.cnf; mysqld --verbose --help"
