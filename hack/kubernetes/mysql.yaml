@@ -40,6 +40,10 @@ spec:
     image: mysql:8.0.14
     imagePullPolicy: IfNotPresent
     name: mysql
+    args:
+    - mysqld
+    - --verbose
+    - --help
     ports:
     - containerPort: 3306
       name: mysql
