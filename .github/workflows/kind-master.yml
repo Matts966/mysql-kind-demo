@@ -20,6 +20,7 @@ jobs:
       env:
         GO111MODULE: on
       run: |
+        which kind
         go get sigs.k8s.io/kind@master
         kind version
         kind create cluster --image kindest/node:v1.16.3
