@@ -20,7 +20,8 @@ jobs:
       env:
         GO111MODULE: on
       run: |
-        go get sigs.k8s.io/kind
+        go get sigs.k8s.io/kind@master
+        kind version
         kind create cluster
         echo "waiting for nodes to be ready ..."
         kubectl wait --for=condition=Ready nodes --all --timeout=5m
