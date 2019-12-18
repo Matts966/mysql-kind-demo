@@ -37,7 +37,7 @@ spec:
         secretKeyRef:
           key: password
           name: stash-e2e
-    image: mysql:8.0.14
+    image: tigerworks/mysql:8.0.18
     imagePullPolicy: IfNotPresent
     name: mysql
     command: ["/bin/bash"]
