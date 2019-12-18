@@ -18,7 +18,7 @@ jobs:
 
     - name: Create Cluster
       run: |
-        rm -rf /usr/local/bin/kind
+        sudo rm -rf /usr/local/bin/kind
         GOBIN=/usr/local/bin GO111MODULE=on go get sigs.k8s.io/kind@master
         kind version
         kind create cluster --image kindest/node:v1.16.3
