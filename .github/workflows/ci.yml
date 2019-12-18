@@ -59,6 +59,10 @@ jobs:
       run: |
         export KUBECONFIG="$(kind get kubeconfig-path)"
         echo "run mysql"
-        kubectl apply -f hack/kubernetes/mysql.yaml &
+        kubectl apply -f hack/kubernetes/mysql.yaml
         sleep 10
-        kubectl logs pod stash-e2e
+        kubectl describe pod stash-e2e
+        echo ________________________________________________________-
+        kubectl logs -f stash-e2e &
+        sleep 60
+        
