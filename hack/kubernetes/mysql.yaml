@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: stash-e2e
+  namespace: default
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 128Mi
+  storageClassName: standard
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: stash-e2e
+  namespace: default
+type: Opaque
+data:
+  username: cm9vdA==
+  password: c3Rhc2gtZTJlLWNwcWR0eg==
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stash-e2e
+  namespace: default
+spec:
+  containers:
+  - env:
+    - name: MYSQL_ROOT_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: password
+          name: stash-e2e
+    image: mysql:8.0.14
+    imagePullPolicy: IfNotPresent
+    name: mysql
+    ports:
+    - containerPort: 3306
+      name: mysql
+      protocol: TCP
+    volumeMounts:
+    - mountPath: /var/lib/mysql
+      name: stash-e2e
+  restartPolicy: Never
+  volumes:
+  - name: stash-e2e
+    persistentVolumeClaim:
+      claimName: stash-e2e

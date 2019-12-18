@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+    branches-ignore:
+      - 'release-*'
+    tags-ignore:
+      - '*.*'
+
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        k8s: [v1.16.3]
+    steps:
+
+    - name: Check out code into the Go module directory
+      uses: actions/checkout@v1
+
+    - name: Set up Docker Buildx
+      id: buildx
+      uses: crazy-max/ghaction-docker-buildx@v1
+      with:
+        version: latest
+
+    - name: Available platforms
+      run: echo ${{ steps.buildx.outputs.platforms }}
+
+    - name: Create Kubernetes ${{ matrix.k8s }} cluster
+      id: kind
+      uses: engineerd/setup-kind@v0.1.0
+      with:
+        version: v0.6.1
+        config: hack/kubernetes/kind.yaml
+        image: kindest/node:${{ matrix.k8s }}
+
+    - name: Prepare cluster for testing
+      id: local-path
+      run: |
+        export KUBECONFIG="$(kind get kubeconfig-path)"
+        echo
+        echo "waiting for nodes to be ready ..."
+        kubectl wait --for=condition=Ready nodes --all --timeout=5m
+        kubectl get nodes
+        echo
+        echo "installing local-path provisioner ..."
+        kubectl delete storageclass --all
+        kubectl apply -f https://github.com/rancher/local-path-provisioner/raw/v0.0.11/deploy/local-path-storage.yaml
+        kubectl wait --for=condition=Ready pods -n local-path-storage --all --timeout=5m
+        kubectl apply -f hack/kubernetes/storageclass/standard.yaml
+        echo
+        echo "install helm 3"
+        curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+
+    - name: Run e2e tests
+      run: |
+        export KUBECONFIG="$(kind get kubeconfig-path)"
+        echo "run mysql"
+        kubectl apply -f hack/kubernetes/mysql.yaml &
+        sleep 10
+        kubectl logs pod stash-e2e
