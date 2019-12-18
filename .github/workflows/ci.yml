@@ -61,7 +61,17 @@ jobs:
         echo "run mysql"
         kubectl apply -f hack/kubernetes/mysql.yaml
         sleep 10
-        kubectl wait --for=condition=Ready pods stash-e2e --timeout=5m
+        # kubectl wait --for=condition=Ready pods stash-e2e --timeout=5m
+        kubectl describe pod stash-e2e
+        sleep 10
+        kubectl describe pod stash-e2e
+        sleep 10
+        kubectl describe pod stash-e2e
+        sleep 10
+        kubectl describe pod stash-e2e
+        sleep 10
+        kubectl describe pod stash-e2e
+        sleep 10
         kubectl describe pod stash-e2e
         echo ________________________________________________________-        
         kubectl logs -f stash-e2e &
