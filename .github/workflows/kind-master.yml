@@ -26,6 +26,7 @@ jobs:
         echo "waiting for nodes to be ready ..."
         kubectl wait --for=condition=Ready nodes --all --timeout=5m
         kubectl get nodes
+        kubectl wait --for=condition=Ready pods -n local-path-storage --all --timeout=5m
         kubectl get pods --all-namespaces
 
     - name: Run e2e tests
