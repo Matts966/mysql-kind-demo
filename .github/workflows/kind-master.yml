@@ -22,7 +22,7 @@ jobs:
         GO111MODULE=on go get sigs.k8s.io/kind@master
         sudo mv ${GOBIN}/kind /usr/local/bin/kind
         kind version
-        kind create cluster --image kindest/node:v1.16.3
+        kind create cluster
         echo "waiting for nodes to be ready ..."
         kubectl wait --for=condition=Ready nodes --all --timeout=5m
         kubectl get nodes
