@@ -26,7 +26,6 @@ jobs:
 
     - name: Run e2e tests
       run: |
-        export KUBECONFIG="$(kind get kubeconfig-path)"
         echo "run mysql"
         kubectl apply -f hack/kubernetes/mysql.yaml
         sleep 10
