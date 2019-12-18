@@ -31,6 +31,10 @@ jobs:
 
     - name: Run e2e tests
       run: |
+        uname -a
+        docker info
+        id
+        ls -l /etc/mysql/conf.d/
         echo "run mysql"
         kubectl apply -f hack/kubernetes/mysql.yaml
         sleep 10
