@@ -1,0 +1,47 @@
+name: KindMaster
+on: [push]
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Set up Go 1.13
+      uses: actions/setup-go@v1
+      with:
+        go-version: 1.13
+      id: go
+
+    - name: Check out code into the Go module directory
+      uses: actions/checkout@v1
+
+    - name: Create Cluster
+      run: |
+        go get sigs.k8s.io/kind
+        kind create cluster
+        echo "waiting for nodes to be ready ..."
+        kubectl wait --for=condition=Ready nodes --all --timeout=5m
+        kubectl get nodes
+
+    - name: Run e2e tests
+      run: |
+        export KUBECONFIG="$(kind get kubeconfig-path)"
+        echo "run mysql"
+        kubectl apply -f hack/kubernetes/mysql.yaml
+        sleep 10
+        # kubectl wait --for=condition=Ready pods stash-e2e --timeout=5m
+        kubectl describe pod stash-e2e
+        sleep 10
+        kubectl describe pod stash-e2e
+        sleep 10
+        kubectl describe pod stash-e2e
+        sleep 10
+        kubectl describe pod stash-e2e
+        sleep 10
+        kubectl describe pod stash-e2e
+        sleep 10
+        kubectl describe pod stash-e2e
+        echo ________________________________________________________-        
+        kubectl logs -f stash-e2e &
+        sleep 60
