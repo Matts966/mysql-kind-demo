@@ -43,7 +43,7 @@ spec:
     command: ["/bin/bash"]
     args:
     - -c
-    - "set -x; whoami; cat /etc/passwd; mount; echo; echo; ls -lah /etc/; ls -lah /etc/mysql; ls -lah /etc/mysql/conf.d; touch /etc/mysql/conf.d/test.cnf; mysqld --verbose --help"
+    - "set -x; whoami; id; cat /etc/passwd; mount; echo; echo; ls -lah /etc/; ls -lah /etc/mysql; ls -lah /etc/mysql/conf.d; touch /etc/mysql/conf.d/test.cnf; mysqld --verbose --help"
     ports:
     - containerPort: 3306
       name: mysql
