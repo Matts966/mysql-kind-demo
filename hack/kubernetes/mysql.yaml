@@ -40,10 +40,10 @@ spec:
     image: mysql:8.0.14
     imagePullPolicy: IfNotPresent
     name: mysql
-    args:
-    - mysqld
-    - --verbose
-    - --help
+    cmd:
+    - bash
+    - -c
+    - "set -x; whoami; cat /etc/passwd; ls -lah /etc/; ls -lah /etc/mysql; ls -lah /etc/mysql/conf.d; touch /etc/mysql/conf.d/test.cnf; mysqld --verbose --help"
     ports:
     - containerPort: 3306
       name: mysql

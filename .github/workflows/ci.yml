@@ -34,7 +34,7 @@ jobs:
       uses: engineerd/setup-kind@v0.1.0
       with:
         version: v0.6.1
-        config: hack/kubernetes/kind.yaml
+        # config: hack/kubernetes/kind.yaml
         image: kindest/node:${{ matrix.k8s }}
 
     - name: Prepare cluster for testing
@@ -45,15 +45,15 @@ jobs:
         echo "waiting for nodes to be ready ..."
         kubectl wait --for=condition=Ready nodes --all --timeout=5m
         kubectl get nodes
-        echo
-        echo "installing local-path provisioner ..."
-        kubectl delete storageclass --all
-        kubectl apply -f https://github.com/rancher/local-path-provisioner/raw/v0.0.11/deploy/local-path-storage.yaml
-        kubectl wait --for=condition=Ready pods -n local-path-storage --all --timeout=5m
-        kubectl apply -f hack/kubernetes/storageclass/standard.yaml
-        echo
-        echo "install helm 3"
-        curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+        # echo
+        # echo "installing local-path provisioner ..."
+        # kubectl delete storageclass --all
+        # kubectl apply -f https://github.com/rancher/local-path-provisioner/raw/v0.0.11/deploy/local-path-storage.yaml
+        # kubectl wait --for=condition=Ready pods -n local-path-storage --all --timeout=5m
+        # kubectl apply -f hack/kubernetes/storageclass/standard.yaml
+        # echo
+        # echo "install helm 3"
+        # curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 
     - name: Run e2e tests
       run: |
