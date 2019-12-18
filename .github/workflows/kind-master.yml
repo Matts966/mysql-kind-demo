@@ -18,8 +18,14 @@ jobs:
 
     - name: Create Cluster
       run: |
-        export GOBIN=$(go env GOPATH)/bin
-        GO111MODULE=on go get sigs.k8s.io/kind@master
+        export GOPATH=$(go env GOPATH)
+        export GOBIN=${GOPATH}/bin
+        # GO111MODULE=on go get sigs.k8s.io/kind@master
+        mkdir -p ${GOPATH}/src/sigs.k8s.io
+        cd ${GOPATH}/src/sigs.k8s.io
+        git clone https://github.com/BenTheElder/kind.git
+        git checkout unarmored
+        GO111MODULE=on go install ./...
         sudo mv ${GOBIN}/kind /usr/local/bin/kind
         kind version
         kind create cluster
