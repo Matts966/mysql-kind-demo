@@ -25,6 +25,7 @@ jobs:
         mkdir -p ${GOPATH}/src/sigs.k8s.io
         cd ${GOPATH}/src/sigs.k8s.io
         git clone https://github.com/BenTheElder/kind.git
+        cd kind
         git checkout unarmored
         GO111MODULE=on go install ./...
         sudo mv ${GOBIN}/kind /usr/local/bin/kind
