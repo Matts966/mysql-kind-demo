@@ -17,11 +17,9 @@ jobs:
       uses: actions/checkout@v1
 
     - name: Create Cluster
-      env:
-        GO111MODULE: on
       run: |
-        which kind
-        go get sigs.k8s.io/kind@master
+        rm -rf /usr/local/bin/kind
+        GOBIN=/usr/local/bin GO111MODULE=on go get sigs.k8s.io/kind@master
         kind version
         kind create cluster --image kindest/node:v1.16.3
         echo "waiting for nodes to be ready ..."
