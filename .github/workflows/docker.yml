@@ -31,5 +31,5 @@ jobs:
 
     - name: Run mysql
       run: |
-      docker info
-      docker run mysql:8.0.14 mysqld --verbose --help
+        docker info
+        docker run mysql:8.0.14 mysqld --verbose --help
