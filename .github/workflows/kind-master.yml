@@ -21,6 +21,7 @@ jobs:
         set -x
         echo 'options overlay metacopy=off redirect_dir=off' > /tmp/overlay.conf
         sudo mv /tmp/overlay.conf /etc/modprobe.d/disable_overlay_redirect_dir.conf
+        sudo systemctl docker restart
         export GOPATH=$(go env GOPATH)
         export GOBIN=${GOPATH}/bin
         GO111MODULE=on go get sigs.k8s.io/kind@master
