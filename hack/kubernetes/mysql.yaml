@@ -43,7 +43,7 @@ spec:
     command: ["/bin/bash"]
     args:
     - -c
-    - "set -x; whoami; id; cat /etc/os-release; uname -a; cat /etc/passwd; cat /proc/mounts; mount; echo; echo; ls -lah /etc/; ls -lah /etc/mysql; ls -lah /etc/mysql/conf.d; touch /etc/mysql/conf.d/test.cnf; ls -lah /etc/mysql/conf.d; ls -lah /usr/sbin/mysqld; stat /etc/mysql/conf.d/; chmod a+rwx /etc/mysql/conf.d/; stat /etc/mysql/conf.d/; stat $(which mysqld); strace mysqld --verbose --help"
+    - "set -x; whoami; id; cat /etc/os-release; uname -a;   cat /etc/passwd; cat /proc/mounts; mount; echo; echo; ls -lah /etc/; ls -lah /etc/mysql; ls -lah /etc/mysql/conf.d; touch /etc/mysql/conf.d/test.cnf; ls -lah /etc/mysql/conf.d; ls -lah /usr/sbin/mysqld; stat /etc/mysql/conf.d/; chmod a+rwx /etc/mysql/conf.d/; stat /etc/mysql/conf.d/; stat $(which mysqld); strace mysqld --verbose --help"
     ports:
     - containerPort: 3306
       name: mysql
