@@ -19,6 +19,7 @@ jobs:
     - name: Create Cluster
       run: |
         set -x
+        echo 'options overlay metacopy=off redirect_dir=off' > /etc/modprobe.d/disable_overlay_redirect_dir.conf
         export GOPATH=$(go env GOPATH)
         export GOBIN=${GOPATH}/bin
         GO111MODULE=on go get sigs.k8s.io/kind@master
