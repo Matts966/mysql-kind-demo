@@ -21,13 +21,13 @@ jobs:
         set -x
         export GOPATH=$(go env GOPATH)
         export GOBIN=${GOPATH}/bin
-        # GO111MODULE=on go get sigs.k8s.io/kind@master
-        mkdir -p ${GOPATH}/src/sigs.k8s.io
-        cd ${GOPATH}/src/sigs.k8s.io
-        git clone https://github.com/BenTheElder/kind.git
-        cd kind
-        git checkout unarmored
-        GO111MODULE=on go install ./...
+        GO111MODULE=on go get sigs.k8s.io/kind@master
+        # mkdir -p ${GOPATH}/src/sigs.k8s.io
+        # cd ${GOPATH}/src/sigs.k8s.io
+        # git clone https://github.com/BenTheElder/kind.git
+        # cd kind
+        # git checkout unarmored
+        # GO111MODULE=on go install ./...
         sudo mv ${GOBIN}/kind /usr/local/bin/kind
         kind version
         kind create cluster
