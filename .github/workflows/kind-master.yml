@@ -19,8 +19,6 @@ jobs:
     - name: Create Cluster
       run: |
         set -x
-        sudo apt-get update || true
-        sudo apt-get install aa-tools
         sudo aa-status
         # echo 'options overlay metacopy=off redirect_dir=off' > /tmp/overlay.conf
         # sudo mv /tmp/overlay.conf /etc/modprobe.d/disable_overlay_redirect_dir.conf
