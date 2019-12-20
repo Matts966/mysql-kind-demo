@@ -16,10 +16,15 @@ jobs:
     - name: Check out code into the Go module directory
       uses: actions/checkout@v1
 
-    - name: Create Cluster
+    - name: apparmor
       run: |
         set -x
         sudo aa-status
+        ls -l /etc/apparmor.d
+
+    - name: Create Cluster
+      run: |
+        set -x
         # echo 'options overlay metacopy=off redirect_dir=off' > /tmp/overlay.conf
         # sudo mv /tmp/overlay.conf /etc/modprobe.d/disable_overlay_redirect_dir.conf
         sudo systemctl restart docker
