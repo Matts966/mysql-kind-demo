@@ -22,7 +22,8 @@ jobs:
         sudo aa-status
         ls -l /etc/apparmor.d
         sudo cat /etc/apparmor.d/usr.sbin.mysqld
-        sudo rm -rf /etc/apparmor.d/usr.sbin.mysqld
+        sudo ln -s /etc/apparmor.d/sbin.dhclient /etc/apparmor.d/disable/
+        sudo systemctl reload apparmor
         sudo systemctl restart apparmor
         sudo systemctl status apparmor 
         sudo aa-status
