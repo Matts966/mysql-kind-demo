@@ -19,17 +19,19 @@ jobs:
     - name: apparmor
       run: |
         set -x
+        sudo apt-get remove mysql-server --purge
         # sudo aa-status
-        # ls -l /etc/apparmor.d
+        ls -l /etc/apparmor.d
         # sudo cat /etc/apparmor.d/usr.sbin.mysqld
         # sudo ln -s /etc/apparmor.d/usr.sbin.mysqld /etc/apparmor.d/disable/
         # sudo systemctl reload apparmor
         # sudo systemctl restart apparmor
         # sudo systemctl status apparmor 
         # sudo aa-status
-        sudo systemctl stop apparmor
-        sudo systemctl disable apparmor
-        sudo systemctl restart docker
+        #
+        # sudo systemctl stop apparmor
+        # sudo systemctl disable apparmor
+        # sudo systemctl restart docker
         docker info
 
     - name: Create Cluster
